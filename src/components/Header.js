@@ -1,13 +1,15 @@
 import React from "react";
-import "../styles/componentStyles/Header.css"
+import waldo from "../assets/waldo.png";
+import "../styles/componentStyles/Header.css";
 
 const Header = ({ isLevel }) => {
   return (
     <div className="header">
-      <p className="headerTitle">
-        <span className="wheres header">Where's </span>
-        <span className="waldo header">Waldo</span>
-      </p>
+      <h1 className="headerTitle">
+        <span className="wheres headerWord">Where's </span>
+        <span className="waldo headerWord">Waldo</span>
+        <img src={waldo} alt="waldo" className="headerWaldo" />
+      </h1>
       {isLevel && (
         <div className="extraHeaderInfo">
           <p className="timer"></p>

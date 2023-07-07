@@ -4,12 +4,25 @@
   background-color: var(--navy);
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .headerTitle {
   display: flex;
+  background-color: transparent;
+  position: relative;
 }
 
-.header {
+.headerWaldo {
+  position: absolute;
+  width: 20px;
+  top: 5px;
+  left: 205px;
+  transform: rotate(-10deg);
+}
+
+.headerWord {
   font-size: 3rem;
+  background-color: transparent;
+  z-index: 1;
 }
