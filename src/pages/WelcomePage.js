@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import waldo from "../assets/waldo.png";
 import "../styles/pageStyles/WelcomePage.css";
 
-const WelcomePage = () => {
+const WelcomePage = ({ hasWelcomeShown, setHasWelcomeShown }) => {
   const [isWaldoActive, setIsWaldoActive] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(true);
 
   useState(() => {
-    setTimeout(() => {
-      document.querySelector(".contentWrap").classList.add("contentActive");
-    })
-  }, [])
+    if (!hasWelcomeShown) {
+      setTimeout(() => {
+        document.querySelector(".contentWrap").classList.add("contentActive");
+      });
+    }
+  }, []);
 
   const handleButtonClick = () => {
     document.querySelector(".contentWrap").classList.remove("contentActive");
     setIsContentVisible(false);
+    setTimeout(() => {
+      setHasWelcomeShown(true);
+    }, 1000);
   };
 
   const handleButtonHover = () => {
@@ -25,9 +30,15 @@ const WelcomePage = () => {
     setIsWaldoActive(false);
   };
 
+  if (hasWelcomeShown) {
+    return;
+  }
+
   return (
     <div className={`welcomePage ${isContentVisible ? "" : "welcomeInactive"}`}>
-      <div className={`contentWrap ${isContentVisible ? "" : "contentInactive"}`}>
+      <div
+        className={`contentWrap ${isContentVisible ? "" : "contentInactive"}`}
+      >
         <h1 className="title">
           <span className="wheres">Where's</span>{" "}
           <span className="waldo">Waldo</span>

@@ -5,11 +5,16 @@ import LevelsPage from "./pages/LevelsPage";
 import winter from "./assets/winter.jpg";
 import track from "./assets/track.jpg"
 import "./styles/globalStyles.css";
+import { useState } from "react";
 function App() {
+  const [hasWelcomeShown, setHasWelcomeShown] = useState(false);
+
+
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LevelsPage />} />
+        <Route path="/" element={<LevelsPage hasWelcomeShown={hasWelcomeShown} setHasWelcomeShown={setHasWelcomeShown}/>} />
         <Route path="/levels" >
           <Route path=":id" element={<LevelPage levelImg={winter}/>} />
         </Route>

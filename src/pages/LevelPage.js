@@ -28,7 +28,7 @@ const LevelPage = ({ levelImg }) => {
 
   return (
     <div className="levelPage">
-      <NavLink className="backBtn" to="/levels">
+      <NavLink className="backBtn" to="/">
         Back
       </NavLink>
       <img
