@@ -6,7 +6,14 @@ const WelcomePage = () => {
   const [isWaldoActive, setIsWaldoActive] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(true);
 
+  useState(() => {
+    setTimeout(() => {
+      document.querySelector(".contentWrap").classList.add("contentActive");
+    })
+  }, [])
+
   const handleButtonClick = () => {
+    document.querySelector(".contentWrap").classList.remove("contentActive");
     setIsContentVisible(false);
   };
 
