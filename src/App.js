@@ -9,9 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/" element={<LevelsPage />} />
         <Route path="/levels" >
-          <Route index element={<LevelsPage />} />
           <Route path=":id" element={<LevelPage levelImg={winter}/>} />
         </Route>
       </Routes>
