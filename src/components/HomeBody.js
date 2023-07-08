@@ -3,15 +3,22 @@ import { NavLink } from "react-router-dom";
 import "../styles/componentStyles/HomeBody.css";
 
 const HomeBody = ({ levelsData }) => {
+
+  const sortedLevels = levelsData.sort((a, b) => {
+    const difficultiesOrder = ["easy", "medium", "hard", "extreme"];
+    return difficultiesOrder.indexOf(a.difficulty) - difficultiesOrder.indexOf(b.difficulty);
+  });
+
   return (
     <div className="homeBody">
       <h2 className="levelsTitle">Levels</h2>
       <div className="levelsWrap">
-        {levelsData.map((level) => (
+        {sortedLevels.map((level) => (
           <NavLink
             to={"/levels/" + levelsData.indexOf(level)}
             className="levelCard"
-            key={levelsData.indexOf(level)}
+            key={sortedLevels.indexOf(level)}
+            id={"lvl" + sortedLevels.indexOf(level)}
           >
             <img src={level.img} alt={level.name} className="lvlImg" />
             <div className="lvlInfo">
@@ -23,16 +30,16 @@ const HomeBody = ({ levelsData }) => {
                 <div className="difficultyBars">
                   {level.difficulty === "easy" && (
                     <>
+                      <div className="diffBar"></div>
+                      <div className="diffBar"></div>
                       <div className="diffBar green"></div>
-                      <div className="diffBar"></div>
-                      <div className="diffBar"></div>
                     </>
                   )}
                   {level.difficulty === "medium" && (
                     <>
-                      <div className="diffBar yellow"></div>
-                      <div className="diffBar yellow"></div>
                       <div className="diffBar"></div>
+                      <div className="diffBar yellow"></div>
+                      <div className="diffBar yellow"></div>
                     </>
                   )}
                   {level.difficulty === "hard" && (

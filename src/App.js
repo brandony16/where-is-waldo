@@ -13,6 +13,10 @@ function App() {
   const [levelsData, setLevelsData] = useState([]);
 
   useEffect(() => {
+    const sortLevels = (levelsData) => {return levelsData.sort((a, b) => {
+      const difficultiesOrder = ["easy", "medium", "hard", "extreme"];
+      return difficultiesOrder.indexOf(a.difficulty) - difficultiesOrder.indexOf(b.difficulty);
+    })};
     // Fetch the level data from Firestore
     const fetchLevelsData = async () => {
       try {
@@ -20,7 +24,7 @@ function App() {
         const snapshot = await getDocs(levelsCollectionRef);
 
         const levels = snapshot.docs.map(doc => doc.data());
-        setLevelsData(levels);
+        setLevelsData(sortLevels(levels));
       } catch (error) {
         console.error('Error fetching level data:', error);
       }

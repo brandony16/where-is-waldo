@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/pageStyles/LevelPage.css";
 import { NavLink } from "react-router-dom";
+import Header from "../components/Header";
 
 const LevelPage = ({ levelImg }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
@@ -20,11 +21,9 @@ const LevelPage = ({ levelImg }) => {
 
   return (
     <div className="levelPage">
-      <NavLink className="backBtn" to="/">
-        Back
-      </NavLink>
+      <Header />
       <img
-        className="mockImg"
+        className="lvlImg"
         ref={imageRef}
         src={levelImg}
         alt="wheres waldo"

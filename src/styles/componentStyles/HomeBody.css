@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 5vh;
   background-color: var(--lightnavy);
+  height: 100%;
   min-height: 90vh;
   align-items: center;
 }
@@ -18,18 +19,33 @@
 
 .levelsWrap {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 10vw;
+  column-gap: 7vw;
   row-gap: 5vh;
   width: 80vw;
-  height: 80vh;
+  height: 100%;
 }
 
 .levelCard {
   background-color: var(--navy);
   padding: 8px;
   text-decoration: none;
+  position: relative;
+  transition: 0.2s ease-in;
+}
+
+.levelCard:hover {
+  transform: scale(1.02);
+}
+
+.levelCard#lvl6 {
+  grid-column: 2 / 3;
+}
+
+.lvlInfo {
+  display: flex;
+  flex-direction: column;
 }
 
 .lvlName {
@@ -39,13 +55,17 @@
 }
 
 .lvlImg {
-  width: 200px;
+  width: 100%;
 }
 
 .difficultyWrap {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 4px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
 }
 
 .lvlDifficulty {
@@ -75,7 +95,7 @@
 }
 
 .diffBar {
-  width: 10%;
+  width: 2vw;
   height: 4px;
   background-color: var(--lightnavy);
 }

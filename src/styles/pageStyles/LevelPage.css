@@ -1,12 +1,12 @@
 .levelPage {
     width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.mockImg {
-    width: 100vw;
+.lvlImg {
+    width: 100%;
 }
 
 .placeClicked {

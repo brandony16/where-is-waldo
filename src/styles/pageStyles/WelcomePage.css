@@ -7,6 +7,7 @@
   place-items: center;
   transition: 0.3s;
   transition-delay: 0.7s;
+  z-index: 999;
 }
 
 .welcomeInactive {
