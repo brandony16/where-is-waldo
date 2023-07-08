@@ -1,0 +1,101 @@
+.homeBody {
+  padding: 16px 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  background-color: var(--lightnavy);
+  min-height: 90vh;
+  align-items: center;
+}
+
+.levelsTitle {
+  width: 100%;
+  color: white;
+  border-bottom: 2px solid red;
+  font-size: 2.5rem;
+  padding: 8px 12px;
+}
+
+.levelsWrap {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10vw;
+  row-gap: 5vh;
+  width: 80vw;
+  height: 80vh;
+}
+
+.levelCard {
+  background-color: var(--navy);
+  padding: 8px;
+  text-decoration: none;
+}
+
+.lvlName {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.lvlImg {
+  width: 200px;
+}
+
+.difficultyWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lvlDifficulty {
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.lvlDifficulty.easy {
+  color: green;
+}
+
+.lvlDifficulty.medium {
+  color: yellow;
+}
+
+.lvlDifficulty.hard {
+  color: red;
+}
+
+.lvlDifficulty.extreme {
+  color: darkred;
+}
+
+.difficultyBars {
+  display: flex;
+  gap: 4px;
+}
+
+.diffBar {
+  width: 10%;
+  height: 4px;
+  background-color: var(--lightnavy);
+}
+
+.green {
+  background-color: green;
+  box-shadow: 0px 0px 6px green;
+}
+
+.yellow {
+  background-color: yellow;
+  box-shadow: 0px 0px 6px yellow;
+}
+
+.red {
+  background-color: red;
+  box-shadow: 0px 0px 6px red;
+}
+
+.blood {
+  background-color: darkred;
+  box-shadow: 0px 0px 6px darkred;
+}

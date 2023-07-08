@@ -3,14 +3,14 @@ import WelcomePage from "./WelcomePage";
 import Header from "../components/Header";
 import HomeBody from "../components/HomeBody";
 
-const LevelsPage = ({ hasWelcomeShown, setHasWelcomeShown }) => {
+const HomePage = ({ hasWelcomeShown, setHasWelcomeShown, levelsData }) => {
   return (
     <div className="LevelsPage">
-      {/* <WelcomePage hasWelcomeShown={hasWelcomeShown} setHasWelcomeShown={setHasWelcomeShown}/> */}
+      {<WelcomePage hasWelcomeShown={hasWelcomeShown} setHasWelcomeShown={setHasWelcomeShown}/>}
       <Header isLevel={false} />
-      <HomeBody levels={["m","n","b"]}/>
+      <HomeBody levelsData={levelsData}/>
     </div>
   );
 };
 
-export default LevelsPage;
+export default HomePage;

@@ -7,24 +7,16 @@ const LevelPage = ({ levelImg }) => {
   const [showDiv, setShowDiv] = useState(false);
   const imageRef = useRef(null);
 
-  useEffect(() => {
-    const handleClick = (event) => {
-      const { clientX, clientY, target } = event;
+  const handleClick = (event) => {
+    const { clientX, clientY, target } = event;
 
-      if (target === imageRef.current) {
-        setClickPosition({ x: clientX, y: clientY });
-        setShowDiv(true);
-      } else {
-        setShowDiv(false);
-      }
-    };
-
-    document.addEventListener("click", handleClick);
-
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
+    if (target === imageRef.current) {
+      setClickPosition({ x: clientX, y: clientY });
+      setShowDiv(true);
+    } else {
+      setShowDiv(false);
+    }
+  };
 
   return (
     <div className="levelPage">
@@ -36,6 +28,7 @@ const LevelPage = ({ levelImg }) => {
         ref={imageRef}
         src={levelImg}
         alt="wheres waldo"
+        onClick={handleClick}
       />
       {showDiv && (
         <div
