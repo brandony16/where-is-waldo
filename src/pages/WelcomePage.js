@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import waldo from "../assets/waldo.png";
+import waldo from "../assets/waveWaldo.png";
 import "../styles/pageStyles/WelcomePage.css";
 
 const WelcomePage = ({ hasWelcomeShown, setHasWelcomeShown }) => {

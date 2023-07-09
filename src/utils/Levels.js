@@ -11,35 +11,42 @@ export const Levels = [
     name: "Factory",
     difficulty: "easy",
     img: factory,
+    characters: ["waldo"]
   },
   {
     name: "Sport Meet",
     difficulty: "easy",
     img: sports,
+    characters: ["waldo"]
   },
   {
     name: "Winter",
     difficulty: "medium",
     img: winter,
+    characters: ["waldo", "odlaw"]
   },
   {
     name: "HollyWood",
     difficulty: "medium",
     img: hollywood,
+    characters: ["waldo", "wizard"]
   },
   {
     name: "Track",
     difficulty: "hard",
     img: track,
+    characters: ["waldo", "wenda", "odlaw"]
   },
   {
     name: "Moon",
     difficulty: "hard",
     img: moon,
+    characters: ["waldo", "wenda", "wizard"]
   },
   {
     name: "Fruit",
     difficulty: "extreme",
     img: fruit,
+    characters: ["waldo", "wenda", "wizard", "odlaw"]
   },
 ]

@@ -1,5 +1,5 @@
 import React from "react";
-import waldo from "../assets/waldo.png";
+import waldo from "../assets/waveWaldo.png";
 import "../styles/componentStyles/Header.css";
 import { NavLink } from "react-router-dom";
 
