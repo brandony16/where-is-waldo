@@ -63,6 +63,7 @@ function App() {
 
     fetchLevelsData();
     fetchCharacterData();
+    fetchCoordsData();
   }, []);
 
   return (

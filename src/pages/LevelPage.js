@@ -7,13 +7,13 @@ const LevelPage = ({ level, characterData, coords }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [showDiv, setShowDiv] = useState(false);
   const [lvlCharacters, setLvlCharacters] = useState([]);
+  const [foundCharacters, setFoundCharacters] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
   const imageRef = useRef(null);
 
   useEffect(() => {
-    // Find the correct characters for the level
     const findCorrectCharacters = () => {
       const correctCharacters = characterData.filter((char) =>
         level.characters.includes(char.name)
@@ -29,7 +29,6 @@ const LevelPage = ({ level, characterData, coords }) => {
     if (target === imageRef.current) {
       setClickPosition({ x: pageX, y: pageY });
       setShowDiv(true);
-      handleEndGame();
     } else {
       setShowDiv(false);
     }
@@ -49,7 +48,8 @@ const LevelPage = ({ level, characterData, coords }) => {
   };
 
   const handleEndGame = () => {
-    clearInterval(intervalId);
+    if (foundCharacters.length + 1 === lvlCharacters.length)
+      clearInterval(intervalId);
   };
 
   const getImageWidth = (imageRef) => {
@@ -63,6 +63,38 @@ const LevelPage = ({ level, characterData, coords }) => {
       return imageRef.current.clientHeight;
     }
     return 0;
+  };
+
+  const checkClickPosition = (charName) => {
+    const { x, y } = clickPosition;
+    const imageWidth = getImageWidth(imageRef);
+    const imageHeight = getImageHeight(imageRef);
+
+    coords.forEach((coord) => {
+      const { name, ...characters } = coord;
+      for (const character in characters) {
+        if (character === charName) {
+          const { relX, relY } = characters[character];
+
+          const expectedX = relX * imageWidth;
+          const expectedY = relY * imageHeight;
+
+          const distance = Math.sqrt(
+            Math.pow(x - expectedX, 2) + Math.pow(y - expectedY, 2)
+          );
+
+          const threshold = 20;
+          if (distance <= threshold) {
+            const foundCharacter = { name, character };
+            setFoundCharacters((prevFoundCharacters) => [
+              ...prevFoundCharacters,
+              foundCharacter,
+            ]);
+            handleEndGame();
+          }
+        }
+      }
+    });
   };
 
   return (
@@ -89,7 +121,17 @@ const LevelPage = ({ level, characterData, coords }) => {
             left: `${clickPosition.x}px`,
             top: `${clickPosition.y}px`,
           }}
-        ></div>
+        >
+          {lvlCharacters.map((char) => (
+            <button
+              className="charBtn"
+              key={char.name}
+              onClick={() => checkClickPosition(char.name)}
+            >
+              {char.name}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
