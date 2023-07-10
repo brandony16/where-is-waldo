@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/pageStyles/LevelPage.css";
 import Header from "../components/Header";
+import LevelModal from "../components/LevelModal";
 
 const LevelPage = ({ level, characterData }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [showDiv, setShowDiv] = useState(false);
   const [lvlCharacters, setLvlCharacters] = useState([]);
+  const [modalVisible, setModalVisible] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -20,34 +24,44 @@ const LevelPage = ({ level, characterData }) => {
     findCorrectCharacters();
   }, [level, characterData]);
 
-
   const handleClick = (event) => {
     const { clientX, clientY, target } = event;
 
     if (target === imageRef.current) {
       setClickPosition({ x: clientX, y: clientY });
       setShowDiv(true);
+      handleEndGame();
     } else {
       setShowDiv(false);
     }
   };
 
+  const handleStartGame = () => {
+    setModalVisible(false);
+    setTimer(0);
+    const startTime = Date.now();
+    const id = setInterval(() => {
+      const elapsedTime = Date.now() - startTime;
+      const formattedTime = (elapsedTime / 10).toFixed(0); // Convert to hundredths of a second
+      setTimer(formattedTime);
+    }, 10);
+
+    setIntervalId(id);
+  };
+
+  const handleEndGame = () => {
+    clearInterval(intervalId);
+  };
+
   return (
     <div className="levelPage">
-      <Header />
-      <div className="lvlModal">
-        <div className="modalContent">
-          <h2 className="toFindTxt">To Find:</h2>
-          <div className="charsToFind">
-            {lvlCharacters.map((char) => (
-              <div className="charToFindWrap" key={char.name}>
-                <img src={char.img} alt={char.name} className="modalChar" />
-              </div>
-            ))}
-          </div>
-          <button className="startGame">Start</button>
-        </div>
-      </div>
+      <Header isLevel={true} timer={timer} />
+      {modalVisible && (
+        <LevelModal
+          lvlCharacters={lvlCharacters}
+          handleStartGame={handleStartGame}
+        />
+      )}
       <img
         className="lvlImg"
         ref={imageRef}

@@ -3,7 +3,20 @@ import waldo from "../assets/waveWaldo.png";
 import "../styles/componentStyles/Header.css";
 import { NavLink } from "react-router-dom";
 
-const Header = ({ isLevel }) => {
+const Header = ({ isLevel, timer }) => {
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time/6000);
+    const seconds = Math.floor((time%6000) / 100);
+    const hundredths = Math.floor((time%100));
+    const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(hundredths)}`;
+    return formattedTime;
+  }
+
+  const padZero = (num) => {
+    return num.toString().padStart(2, "0");
+  };
+  
   return (
     <div className="header">
       <NavLink className="headerTitle" to="/">
@@ -13,7 +26,7 @@ const Header = ({ isLevel }) => {
       </NavLink>
       {isLevel && (
         <div className="extraHeaderInfo">
-          <p className="timer"></p>
+          <p className="timer">{formatTime(timer)}</p>
           <div className="toFind"></div>
         </div>
       )}

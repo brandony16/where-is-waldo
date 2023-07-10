@@ -4,6 +4,7 @@
   background-color: var(--navy);
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   padding: 0px 12px;
 }
@@ -11,8 +12,9 @@
 .headerTitle {
   display: flex;
   background-color: transparent;
-  position: relative;
+  position: absolute;
   text-decoration: none;
+  left: 12px;
 }
 
 .headerWaldo {
@@ -27,4 +29,14 @@
   font-size: 3rem;
   background-color: transparent;
   z-index: 1;
+}
+
+.extraHeaderInfo {
+  display: flex;
+  gap: 3%;
+}
+
+.timer {
+  font-size: 3.5rem;
+  color: white;
 }
