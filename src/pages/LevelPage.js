@@ -3,7 +3,7 @@ import "../styles/pageStyles/LevelPage.css";
 import Header from "../components/Header";
 import LevelModal from "../components/LevelModal";
 
-const LevelPage = ({ level, characterData }) => {
+const LevelPage = ({ level, characterData, coords }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [showDiv, setShowDiv] = useState(false);
   const [lvlCharacters, setLvlCharacters] = useState([]);
@@ -25,10 +25,9 @@ const LevelPage = ({ level, characterData }) => {
   }, [level, characterData]);
 
   const handleClick = (event) => {
-    const { clientX, clientY, target } = event;
-
+    const { pageX, pageY, target } = event;
     if (target === imageRef.current) {
-      setClickPosition({ x: clientX, y: clientY });
+      setClickPosition({ x: pageX, y: pageY });
       setShowDiv(true);
       handleEndGame();
     } else {
@@ -42,7 +41,7 @@ const LevelPage = ({ level, characterData }) => {
     const startTime = Date.now();
     const id = setInterval(() => {
       const elapsedTime = Date.now() - startTime;
-      const formattedTime = (elapsedTime / 10).toFixed(0); // Convert to hundredths of a second
+      const formattedTime = (elapsedTime / 10).toFixed(0);
       setTimer(formattedTime);
     }, 10);
 
@@ -51,6 +50,19 @@ const LevelPage = ({ level, characterData }) => {
 
   const handleEndGame = () => {
     clearInterval(intervalId);
+  };
+
+  const getImageWidth = (imageRef) => {
+    if (imageRef && imageRef.current) {
+      return imageRef.current.clientWidth;
+    }
+    return 0;
+  };
+  const getImageHeight = (imageRef) => {
+    if (imageRef && imageRef.current) {
+      return imageRef.current.clientHeight;
+    }
+    return 0;
   };
 
   return (

@@ -9,13 +9,17 @@ import { db } from "./firebase/firebaseConfig";
 // import { Levels } from "./utils/Levels";
 // import populateCharacterInfo from "./firebase/populateCharacterInfo";
 // import characters from "./utils/Characters";
+// import coords from "./utils/Coords";
+// import populateCoordInfo from "./firebase/populateCoordInfo";
 
 function App() {
   const [hasWelcomeShown, setHasWelcomeShown] = useState(false);
   const [levelsData, setLevelsData] = useState([]);
   const [characterData, setCharacterData] = useState([]);
+  const [coordsData, setCoordsData] = useState([]);
 
   useEffect(() => {
+    // populateCoordInfo(coords);
     // populateLevelInfo(Levels);
     // populateCharacterInfo(characters);
     const sortLevels = (levelsData) => {return levelsData.sort((a, b) => {
@@ -45,6 +49,17 @@ function App() {
         console.error('Error fetching character data:', error);
       }
     }
+    const fetchCoordsData = async () => {
+      try {
+        const coordsCollectionRef = collection(db, 'coords');
+        const snapshot = await getDocs(coordsCollectionRef);
+
+        const coords = snapshot.docs.map(doc => doc.data());
+        setCoordsData(coords);
+      } catch (error) {
+        console.error('Error fetching character data:', error);
+      }
+    }
 
     fetchLevelsData();
     fetchCharacterData();
@@ -66,13 +81,13 @@ function App() {
         <Route path="/levels">
         {levelsData.length > 0 && (
             <>
-              <Route path="0" element={<LevelPage level={levelsData[0] } characterData={characterData} />} />
-              <Route path="1" element={<LevelPage level={levelsData[1] } characterData={characterData} />} />
-              <Route path="2" element={<LevelPage level={levelsData[2] } characterData={characterData} />} />
-              <Route path="3" element={<LevelPage level={levelsData[3] } characterData={characterData} />} />
-              <Route path="4" element={<LevelPage level={levelsData[4] } characterData={characterData} />} />
-              <Route path="5" element={<LevelPage level={levelsData[5] } characterData={characterData} />} />
-              <Route path="6" element={<LevelPage level={levelsData[6] } characterData={characterData} />} />
+              <Route path="0" element={<LevelPage level={levelsData[0] } characterData={characterData} coords={coordsData} />} />
+              <Route path="1" element={<LevelPage level={levelsData[1] } characterData={characterData} coords={coordsData} />} />
+              <Route path="2" element={<LevelPage level={levelsData[2] } characterData={characterData} coords={coordsData} />} />
+              <Route path="3" element={<LevelPage level={levelsData[3] } characterData={characterData} coords={coordsData} />} />
+              <Route path="4" element={<LevelPage level={levelsData[4] } characterData={characterData} coords={coordsData} />} />
+              <Route path="5" element={<LevelPage level={levelsData[5] } characterData={characterData} coords={coordsData} />} />
+              <Route path="6" element={<LevelPage level={levelsData[6] } characterData={characterData} coords={coordsData} />} />
             </>
           )}
         </Route>

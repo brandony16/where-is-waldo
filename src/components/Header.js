@@ -9,7 +9,7 @@ const Header = ({ isLevel, timer }) => {
     const minutes = Math.floor(time/6000);
     const seconds = Math.floor((time%6000) / 100);
     const hundredths = Math.floor((time%100));
-    const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(hundredths)}`;
+    const formattedTime = `${padZero(minutes)}:${padZero(seconds)}.${padZero(hundredths)}`;
     return formattedTime;
   }
 
