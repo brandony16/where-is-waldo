@@ -12,7 +12,7 @@ const HomeBody = ({ levelsData }) => {
   return (
     <div className="homeBody">
       <h2 className="levelsTitle">Levels</h2>
-      <div className="levelsWrap">
+      <div className="levelsWrap"> 
         {sortedLevels.map((level) => (
           <NavLink
             to={"/levels/" + levelsData.indexOf(level)}

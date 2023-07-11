@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "../styles/pageStyles/LevelPage.css";
 import Header from "../components/Header";
 import LevelModal from "../components/LevelModal";
+import EndModal from "../components/EndModal";
 
 const LevelPage = ({ level, characterData, coords }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
@@ -11,6 +12,7 @@ const LevelPage = ({ level, characterData, coords }) => {
   const [modalVisible, setModalVisible] = useState(true);
   const [timer, setTimer] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
+  const [endModalVisible, setEndModalVisible] = useState(false);
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -36,6 +38,7 @@ const LevelPage = ({ level, characterData, coords }) => {
 
   const handleStartGame = () => {
     setModalVisible(false);
+    setFoundCharacters([]);
     setTimer(0);
     const startTime = Date.now();
     const id = setInterval(() => {
@@ -48,8 +51,10 @@ const LevelPage = ({ level, characterData, coords }) => {
   };
 
   const handleEndGame = () => {
-    if (foundCharacters.length + 1 === lvlCharacters.length)
+    if (foundCharacters.length + 1 === lvlCharacters.length) {
       clearInterval(intervalId);
+      setEndModalVisible(true);
+    }
   };
 
   const getImageWidth = (imageRef) => {
@@ -94,7 +99,7 @@ const LevelPage = ({ level, characterData, coords }) => {
             Math.pow(x - expectedX, 2) + Math.pow(y - expectedY, 2)
           );
 
-          const threshold = 20;
+          const threshold = 30;
           if (distance <= threshold) {
             showFoundTxt(character);
             const foundCharacter = { name, character };
@@ -163,6 +168,7 @@ const LevelPage = ({ level, characterData, coords }) => {
           {"YOU FOUND " + char.name.toUpperCase()}
         </p>
       ))}
+      {endModalVisible && <EndModal time={timer} handleStartGame={handleStartGame}/>}
     </div>
   );
 };
