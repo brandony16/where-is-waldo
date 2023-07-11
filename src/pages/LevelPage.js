@@ -3,8 +3,18 @@ import "../styles/pageStyles/LevelPage.css";
 import Header from "../components/Header";
 import LevelModal from "../components/LevelModal";
 import EndModal from "../components/EndModal";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
-const LevelPage = ({ level, characterData, coords }) => {
+const LevelPage = ({ level, characterData, coords, leaderboardData }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [showDiv, setShowDiv] = useState(false);
   const [lvlCharacters, setLvlCharacters] = useState([]);
@@ -115,6 +125,34 @@ const LevelPage = ({ level, characterData, coords }) => {
     setShowDiv(false);
   };
 
+  const checkLeaderboard = async (userName) => {
+    const leaderboardCollectionRef = collection(db, "leaderboard");
+    const leaderboardQuerySnapshot = await getDocs(
+      query(
+        leaderboardCollectionRef,
+        where("level", "==", level.name),
+        orderBy("time"),
+        limit(10)
+      )
+    );
+
+    const leaderboardDocs = leaderboardQuerySnapshot.docs;
+
+    if (
+      leaderboardDocs.length < 10 ||
+      timer < leaderboardDocs[leaderboardDocs.length - 1].data().time
+    ) {
+
+      const newEntry = {
+        level: level.name,
+        timer,
+        name: userName,
+      };
+
+      await addDoc(leaderboardCollectionRef, newEntry);
+    }
+  };
+
   return (
     <div className="levelPage">
       <Header
@@ -168,7 +206,14 @@ const LevelPage = ({ level, characterData, coords }) => {
           {"YOU FOUND " + char.name.toUpperCase()}
         </p>
       ))}
-      {endModalVisible && <EndModal time={timer} handleStartGame={handleStartGame}/>}
+      {endModalVisible && (
+        <EndModal
+          time={timer}
+          handleStartGame={handleStartGame}
+          checkLeaderboard={checkLeaderboard}
+          leaderboardData={leaderboardData[level.name] || []}
+        />
+      )}
     </div>
   );
 };

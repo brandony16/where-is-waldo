@@ -17,53 +17,82 @@ function App() {
   const [levelsData, setLevelsData] = useState([]);
   const [characterData, setCharacterData] = useState([]);
   const [coordsData, setCoordsData] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
     // populateCoordInfo(coords);
     // populateLevelInfo(Levels);
     // populateCharacterInfo(characters);
-    const sortLevels = (levelsData) => {return levelsData.sort((a, b) => {
-      const difficultiesOrder = ["easy", "medium", "hard", "extreme"];
-      return difficultiesOrder.indexOf(a.difficulty) - difficultiesOrder.indexOf(b.difficulty);
-    })};
+    const sortLevels = (levelsData) => {
+      return levelsData.sort((a, b) => {
+        const difficultiesOrder = ["easy", "medium", "hard", "extreme"];
+        return (
+          difficultiesOrder.indexOf(a.difficulty) -
+          difficultiesOrder.indexOf(b.difficulty)
+        );
+      });
+    };
     // Fetch the level data from Firestore
     const fetchLevelsData = async () => {
       try {
-        const levelsCollectionRef = collection(db, 'levels');
+        const levelsCollectionRef = collection(db, "levels");
         const snapshot = await getDocs(levelsCollectionRef);
 
-        const levels = snapshot.docs.map(doc => doc.data());
+        const levels = snapshot.docs.map((doc) => doc.data());
         setLevelsData(sortLevels(levels));
       } catch (error) {
-        console.error('Error fetching level data:', error);
+        console.error("Error fetching level data:", error);
       }
     };
     const fetchCharacterData = async () => {
       try {
-        const characterCollectionRef = collection(db, 'characters');
+        const characterCollectionRef = collection(db, "characters");
         const snapshot = await getDocs(characterCollectionRef);
 
-        const characters = snapshot.docs.map(doc => doc.data());
+        const characters = snapshot.docs.map((doc) => doc.data());
         setCharacterData(characters);
       } catch (error) {
-        console.error('Error fetching character data:', error);
+        console.error("Error fetching character data:", error);
       }
-    }
+    };
     const fetchCoordsData = async () => {
       try {
-        const coordsCollectionRef = collection(db, 'coords');
+        const coordsCollectionRef = collection(db, "coords");
         const snapshot = await getDocs(coordsCollectionRef);
 
-        const coords = snapshot.docs.map(doc => doc.data());
+        const coords = snapshot.docs.map((doc) => doc.data());
         setCoordsData(coords);
       } catch (error) {
-        console.error('Error fetching character data:', error);
+        console.error("Error fetching character data:", error);
       }
-    }
+    };
+    const fetchLeaderboardData = async () => {
+      try {
+        const leaderboardCollectionRef = collection(db, "leaderboard");
+        const leaderboardQuerySnapshot = await getDocs(
+          leaderboardCollectionRef
+        );
+
+        const leaderboardData = {};
+
+        leaderboardQuerySnapshot.forEach((doc) => {
+          const level = doc.data().level;
+          if (!leaderboardData[level]) {
+            leaderboardData[level] = [];
+          }
+          leaderboardData[level].push(doc.data());
+        });
+
+        setLeaderboardData(leaderboardData);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
+      }
+    };
 
     fetchLevelsData();
     fetchCharacterData();
     fetchCoordsData();
+    fetchLeaderboardData();
   }, []);
 
   return (
@@ -80,17 +109,21 @@ function App() {
           }
         />
         <Route path="/levels">
-        {levelsData.length > 0 && (
-            <>
-              <Route path="0" element={<LevelPage level={levelsData[0] } characterData={characterData} coords={coordsData} />} />
-              <Route path="1" element={<LevelPage level={levelsData[1] } characterData={characterData} coords={coordsData} />} />
-              <Route path="2" element={<LevelPage level={levelsData[2] } characterData={characterData} coords={coordsData} />} />
-              <Route path="3" element={<LevelPage level={levelsData[3] } characterData={characterData} coords={coordsData} />} />
-              <Route path="4" element={<LevelPage level={levelsData[4] } characterData={characterData} coords={coordsData} />} />
-              <Route path="5" element={<LevelPage level={levelsData[5] } characterData={characterData} coords={coordsData} />} />
-              <Route path="6" element={<LevelPage level={levelsData[6] } characterData={characterData} coords={coordsData} />} />
-            </>
-          )}
+          {levelsData.length > 0 &&
+            levelsData.map((level, index) => (
+              <Route
+                key={index}
+                path={String(index)}
+                element={
+                  <LevelPage
+                    level={level}
+                    characterData={characterData}
+                    coords={coordsData}
+                    leaderboardData={leaderboardData}
+                  />
+                }
+              />
+            ))}
         </Route>
       </Routes>
     </BrowserRouter>

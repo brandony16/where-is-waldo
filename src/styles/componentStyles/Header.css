@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+.header.home {
+  position: relative;
+}
+
 .headerTitle {
   display: flex;
   background-color: transparent;

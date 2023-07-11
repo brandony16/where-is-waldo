@@ -19,7 +19,7 @@ const Header = ({ isLevel, timer, characters, foundCharacters }) => {
   };
 
   return (
-    <div className="header">
+    <div className={"header " + (!isLevel ? "home" : "")}>
       <NavLink className="headerTitle" to="/">
         <span className="wheres headerWord">Where's </span>
         <span className="waldo headerWord">Waldo</span>
