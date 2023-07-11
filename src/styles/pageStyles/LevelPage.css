@@ -1,108 +1,153 @@
 .levelPage {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8vh;
 }
 
 .lvlImg {
-    width: 100%;
+  width: 100%;
 }
 
 .placeClicked {
-    width: 48px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content
+}
+
+.charBtn {
+  background-color: whitesmoke;
+  border: none;
+  font-size: 1.3rem;
+  padding: 8px 16px;
+}
+
+.charBtn:hover {
+    background-color: rgb(202, 202, 202);
 }
 
 /* Level Modal */
 
 .lvlModal {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(12, 12, 19, 0.6);
-    display: grid;
-    place-items: center;
-    z-index: 1000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(12, 12, 19, 0.8);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
 }
 
 .modalContent {
-    background-color: var(--navy);
-    width: 15vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    box-sizing: border-box;
-    border-radius: 16px;
-    gap: 16px;
+  background-color: var(--navy);
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  gap: 16px;
 }
 
 .toFindTxt {
-    font-size: 3rem;
-    color: white;
+  font-size: 3rem;
+  color: white;
 }
 
 .charsToFind {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .charToFindWrap {
-    display: flex;
-    width: 100%;
-    gap: 12px;
+  display: flex;
+  width: 100%;
+  gap: 12px;
 }
 
 .modalChar {
-    height: 60px;
-    aspect-ratio: 1/1;
-    border-radius: 35px;
-    border: 2px solid red;
+  height: 60px;
+  aspect-ratio: 1/1;
+  border-radius: 35px;
+  border: 2px solid red;
+  box-shadow: 0px 0px 6px red;
 }
 
 .modalChar.yellow {
-    border: 2px solid yellow;
+  border: 2px solid yellow;
+  box-shadow: 0px 0px 6px yellow;
 }
 
 .modalChar.blue {
-    border: 2px solid rgb(107, 201, 233);
-    box-shadow: 0px 0px 6px rgb(107, 201, 233);
+  border: 2px solid var(--wizardblue);
+  box-shadow: 0px 0px 6px var(--wizardblue);
 }
 
 .charToFindInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .charName {
-    font-size: 1.4rem;
-    color: white;
+  font-size: 1.4rem;
+  color: white;
 }
 
 .charDesc {
-    font-size: 1rem;
-    color: white;
+  font-size: 1rem;
+  color: white;
 }
 
 .startGame {
-    background-color: red;
-    border: none;
-    color: white;
-    font-size: 2.5rem;
-    width: 80%;
-    border-radius: 8px;
-    transition: 0.2s ease-in-out;
+  background-color: red;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  width: 80%;
+  border-radius: 8px;
+  transition: 0.2s ease-in-out;
 }
 
 .startGame:hover {
-    cursor: pointer;
-    background-color: white;
-    color: red;
+  cursor: pointer;
+  background-color: white;
+  color: red;
+}
+
+.foundDialouge {
+  position: fixed;
+  font-size: 2rem;
+  width: fit-content;
+  bottom: 8px;
+  text-align: center;
+  background-color: rgb(218, 218, 218);
+  border-radius: 8px;
+  display: none;
+  align-self: center;
+  padding: 0px 8px;
+}
+
+.foundwaldo,
+.foundwenda {
+  color: red;
+}
+
+.foundodlaw {
+  color: yellow;
+}
+
+.foundwizard {
+  color: var(--wizardblue);
+}
+
+.txtActive {
+  display: block;
 }

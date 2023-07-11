@@ -5,8 +5,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   padding: 0px 12px;
+  box-sizing: border-box;
 }
 
 .headerTitle {
@@ -39,4 +42,36 @@
 .timer {
   font-size: 3.5rem;
   color: white;
+}
+
+.toFind {
+  position: absolute;
+  display: flex;
+  gap: 16px;
+  width: 20vw;
+  justify-content: space-evenly;
+  right: 12px;
+  top: 8px;
+}
+
+.headerCharWrap.found {
+  opacity: 0.5;
+}
+
+.headerCharImg {
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  border: 2px solid red;
+  box-shadow: 0px 0px 6px red;
+}
+
+.headerCharImg.yellow {
+  border: 2px solid yellow;
+  box-shadow: 0px 0px 6px yellow;
+}
+
+.headerCharImg.blue {
+  border: 2px solid var(--wizardblue);
+  box-shadow: 0px 0px 6px var(--wizardblue);
 }

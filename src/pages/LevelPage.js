@@ -65,6 +65,17 @@ const LevelPage = ({ level, characterData, coords }) => {
     return 0;
   };
 
+  const showFoundTxt = (name) => {
+    document
+      .querySelectorAll(".foundDialouge")
+      .forEach((item) => item.classList.remove("txtActive"));
+    const charDialouge = document.querySelector(`.found${name}`);
+    charDialouge.classList.add("txtActive");
+    setTimeout(() => {
+      charDialouge.classList.remove("txtActive");
+    }, 2000);
+  };
+
   const checkClickPosition = (charName) => {
     const { x, y } = clickPosition;
     const imageWidth = getImageWidth(imageRef);
@@ -85,6 +96,7 @@ const LevelPage = ({ level, characterData, coords }) => {
 
           const threshold = 20;
           if (distance <= threshold) {
+            showFoundTxt(character);
             const foundCharacter = { name, character };
             setFoundCharacters((prevFoundCharacters) => [
               ...prevFoundCharacters,
@@ -95,11 +107,17 @@ const LevelPage = ({ level, characterData, coords }) => {
         }
       }
     });
+    setShowDiv(false);
   };
 
   return (
     <div className="levelPage">
-      <Header isLevel={true} timer={timer} />
+      <Header
+        isLevel={true}
+        timer={timer}
+        characters={lvlCharacters}
+        foundCharacters={foundCharacters}
+      />
       {modalVisible && (
         <LevelModal
           lvlCharacters={lvlCharacters}
@@ -122,17 +140,29 @@ const LevelPage = ({ level, characterData, coords }) => {
             top: `${clickPosition.y}px`,
           }}
         >
-          {lvlCharacters.map((char) => (
-            <button
-              className="charBtn"
-              key={char.name}
-              onClick={() => checkClickPosition(char.name)}
-            >
-              {char.name}
-            </button>
-          ))}
+          {lvlCharacters
+            .filter(
+              (char) =>
+                !foundCharacters.some(
+                  (foundChar) => foundChar.character === char.name
+                )
+            )
+            .map((char) => (
+              <button
+                className="charBtn"
+                key={char.name}
+                onClick={() => checkClickPosition(char.name)}
+              >
+                {char.name.toUpperCase()}
+              </button>
+            ))}
         </div>
       )}
+      {lvlCharacters.map((char) => (
+        <p className={"foundDialouge found" + char.name} key={char.name}>
+          {"YOU FOUND " + char.name.toUpperCase()}
+        </p>
+      ))}
     </div>
   );
 };
