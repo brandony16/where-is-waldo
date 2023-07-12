@@ -5,12 +5,6 @@ import "./styles/globalStyles.css";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase/firebaseConfig";
-// import { populateLevelInfo } from "./firebase/populateLevelInfo";
-// import { Levels } from "./utils/Levels";
-// import populateCharacterInfo from "./firebase/populateCharacterInfo";
-// import characters from "./utils/Characters";
-// import coords from "./utils/Coords";
-// import populateCoordInfo from "./firebase/populateCoordInfo";
 
 function App() {
   const [hasWelcomeShown, setHasWelcomeShown] = useState(false);
@@ -20,9 +14,6 @@ function App() {
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
-    // populateCoordInfo(coords);
-    // populateLevelInfo(Levels);
-    // populateCharacterInfo(characters);
     const sortLevels = (levelsData) => {
       return levelsData.sort((a, b) => {
         const difficultiesOrder = ["easy", "medium", "hard", "extreme"];
@@ -32,7 +23,7 @@ function App() {
         );
       });
     };
-    // Fetch the level data from Firestore
+
     const fetchLevelsData = async () => {
       try {
         const levelsCollectionRef = collection(db, "levels");
