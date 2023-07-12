@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import LevelPage from "./pages/LevelPage";
 import HomePage from "./pages/HomePage";
 import "./styles/globalStyles.css";
@@ -87,7 +87,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -117,7 +117,7 @@ function App() {
             ))}
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

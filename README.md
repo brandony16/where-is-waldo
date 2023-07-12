@@ -2,6 +2,8 @@
 
 - Where's Waldo web game based on real levels
 - Can you be the fastest to find all the characters?
+<br>
+[Play Game](https://BabySparta.github.io/where-is-waldo/) :point_left:
 
 ## Features
 
@@ -12,7 +14,7 @@
 
 ## Construction
 
-- Built with React
+- Built with [React](https://reactjs.org/)
 - Utilizes Firebase as a backend
 
 ## Goals
