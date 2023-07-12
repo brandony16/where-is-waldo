@@ -79,3 +79,56 @@
   border: 2px solid var(--wizardblue);
   box-shadow: 0px 0px 6px var(--wizardblue);
 }
+
+@media (max-width: 1400px) {
+  .headerTitle {
+    transform: scale(0.9);
+    transform-origin: left;
+  }
+  .toFind {
+    transform: scale(0.9);
+    transform-origin:right;
+  }
+  .timer {
+    transform: scale(0.9);
+  }
+}
+@media (max-width: 1000px) {
+  .headerTitle {
+    transform: scale(0.75);
+    transform-origin: left;
+  }
+  .toFind {
+    transform: scale(0.75);
+    transform-origin:right;
+  }
+  .timer {
+    transform: scale(0.75);
+  }
+}
+@media (max-width: 800px) { 
+  .headerTitle {
+    transform: scale(0.6);
+    transform-origin: left;
+  }
+  .toFind {
+    transform: scale(0.6);
+    transform-origin:right;
+  }
+  .timer {
+    transform: scale(0.6);
+  }
+}
+@media (max-width: 600px) { 
+  .headerTitle {
+    transform: scale(0.5);
+    transform-origin: left;
+  }
+  .toFind {
+    transform: scale(0.5);
+    transform-origin:right;
+  }
+  .timer {
+    transform: scale(0.5);
+  }
+}

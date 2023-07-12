@@ -11,6 +11,7 @@
 .endModalContent {
   background-color: var(--navy);
   width: 25vw;
+  min-height: 40vh;
   display: grid;
   grid-template-rows: 3fr 1fr;
   grid-template-columns: repeat(2, 1fr);
@@ -22,8 +23,8 @@
 
 .leaderboard {
   color: white;
-  font-size: 1.3rem;
-  
+  font-size: 1.5rem;
+  list-style-position: inside;
 }
 
 .gameInfo {
@@ -31,6 +32,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 }
 
 .timeWrap {
@@ -43,6 +45,23 @@
 .finishTime {
   font-size: 1.5rem;
   color: white;
+}
+
+.username {
+  background-color: transparent;
+  border: none;
+  color: white;
+  box-shadow: 0px 2px white;
+  font-size: 1.3rem;
+  width: 15ch;
+  transition: 0.2s ease-in-out;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.username:focus {
+  box-shadow: 0px 4px red;
+  outline: none;
 }
 
 .gameButtons {
@@ -64,4 +83,26 @@
 
 .gameBtn:hover {
   cursor: pointer;
+  border-bottom: 4px solid darkred;
+}
+
+@media (max-width: 1400px) {
+  .endModalContent {
+    width: 30%;
+  }
+}
+@media (max-width: 1200px) {
+  .endModalContent {
+    width: 40%;
+  }
+}
+@media (max-width: 1000px) {
+  .endModalContent {
+    width: 50%;
+  }
+}
+@media (max-width: 800px) {
+  .endModalContent {
+    width: 60%;
+  }
 }

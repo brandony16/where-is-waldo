@@ -119,3 +119,20 @@
   background-color: darkred;
   box-shadow: 0px 0px 6px darkred;
 }
+
+@media (max-width: 1000px) {
+  .levelsWrap {
+    grid-template-columns: 1fr 1fr;
+  }
+  .levelCard#lvl6 {
+    grid-column: 1/2;
+  }
+}
+@media (max-width: 600px) {
+  .levelsWrap {
+    grid-template-columns: 1fr;
+  }
+  .levelCard#lvl6 {
+    grid-column: 1/2;
+  }
+}

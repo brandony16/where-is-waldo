@@ -48,6 +48,7 @@ const LevelPage = ({ level, characterData, coords, leaderboardData }) => {
 
   const handleStartGame = () => {
     setModalVisible(false);
+    setEndModalVisible(false);
     setFoundCharacters([]);
     setTimer(0);
     const startTime = Date.now();
