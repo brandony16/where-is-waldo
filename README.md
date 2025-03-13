@@ -9,7 +9,7 @@
 
 - 7 levels and 4 different difficulties
 - 4 different characters to find: Waldo, Odlaw, Wenda, and Wizard
-- Leaderboard displaying top 10 times for that level
+- Leaderboard displaying top 10 times for that level (Non functional at the moment because the databases were closed due to inactivity)
 - Ability to submit your name and time to the leaderboard
 
 ## Construction
