@@ -3,7 +3,7 @@
 - Where's Waldo web game based on real levels
 - Can you be the fastest to find all the characters?
 
-[Play Game](https://BabySparta.github.io/where-is-waldo/) :point_left:
+[Play Game](https://brandony16.github.io/where-is-waldo/) :point_left:
 
 ## Features
 
