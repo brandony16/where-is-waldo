@@ -1,12 +1,12 @@
 import React from "react";
 
-const LevelModal = ({ lvlCharacters, handleStartGame }) => {
+const LevelModal = ({ levelCharacters, handleStartGame }) => {
   return (
     <div className="lvlModal">
       <div className="modalContent">
         <h2 className="toFindTxt">To Find:</h2>
         <div className="charsToFind">
-          {lvlCharacters.map((char) => (
+          {levelCharacters.map((char) => (
             <div className="charToFindWrap" key={char.name}>
               <img
                 src={char.img}
@@ -27,10 +27,15 @@ const LevelModal = ({ lvlCharacters, handleStartGame }) => {
             </div>
           ))}
         </div>
-        <button className="startGame" onClick={handleStartGame}>Start</button>
+        <button className="startGame" onClick={handleStartGame}>
+          Start
+        </button>
       </div>
     </div>
   );
 };
 
-export default LevelModal;
+const MemoizedLevelModal = React.memo(LevelModal);
+MemoizedLevelModal.displayName = "LevelModal";
+
+export default MemoizedLevelModal;

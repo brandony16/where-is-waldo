@@ -55,13 +55,24 @@ const EndModal = ({
           <button className="gameBtn" onClick={handleStartGame}>
             Play Again
           </button>
-          {!timeSubmitted && <button className="gameBtn" onClick={() => {checkLeaderboard(username); setTimeSubmitted(true)}}>
-            Submit Time
-          </button>}
+          {!timeSubmitted && (
+            <button
+              className="gameBtn"
+              onClick={() => {
+                checkLeaderboard(time, username);
+                setTimeSubmitted(true);
+              }}
+            >
+              Submit Time
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default EndModal;
+const MemoizedEndModal = React.memo(EndModal);
+MemoizedEndModal.displayName = "EndModal";
+
+export default MemoizedEndModal;
