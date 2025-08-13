@@ -18,7 +18,7 @@ export default function useLeaderboard(levelName) {
         query(
           leaderboardRef,
           where("level", "==", levelName),
-          orderBy("time"),
+          orderBy("timer"),
           limit(10)
         )
       );
@@ -31,7 +31,7 @@ export default function useLeaderboard(levelName) {
       ) {
         const newEntry = {
           level: levelName,
-          time,
+          timer: time,
           name: username,
         };
 

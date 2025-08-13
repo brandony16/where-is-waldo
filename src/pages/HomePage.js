@@ -5,9 +5,12 @@ import HomeBody from "../components/HomeBody";
 const HomePage = ({ hasWelcomeShown, setHasWelcomeShown, sortedLevels }) => {
   return (
     <div className="LevelsPage">
-      <WelcomePage hasWelcomeShown={hasWelcomeShown} setHasWelcomeShown={setHasWelcomeShown}/>
+      <WelcomePage
+        hasWelcomeShown={hasWelcomeShown}
+        setHasWelcomeShown={setHasWelcomeShown}
+      />
       <Header isLevel={false} />
-      <HomeBody sortedLevels={sortedLevels}/>
+      <HomeBody sortedLevels={sortedLevels} />
     </div>
   );
 };
