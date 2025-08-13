@@ -1,20 +1,39 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-ync04EGWXJEhgxcy5xaMn8VGelY-EZQ",
-  authDomain: "where-is-waldo-3f27e.firebaseapp.com",
-  projectId: "where-is-waldo-3f27e",
-  storageBucket: "where-is-waldo-3f27e.appspot.com",
-  messagingSenderId: "293849894098",
-  appId: "1:293849894098:web:57fe8d7449462ddf92310b"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const missingEnvVars = Object.entries(firebaseConfig).filter(
+  ([key, value]) => !value
+);
 
-const db = getFirestore(app);
+if (missingEnvVars.length > 0) {
+  console.error(
+    "Missing Firebase configuration environment variables:",
+    missingEnvVars.map(([key]) => key).join(", ")
+  );
+  throw new Error("Missing Firebase Environment Variables");
+}
 
-const storage = getStorage(app);
+let app;
+let db;
+let storage;
+
+try {
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  storage = getStorage(app);
+} catch (error) {
+  console.error("Error initializing Firebase: ", error);
+  throw error;
+}
 
 export { app, db, storage };
