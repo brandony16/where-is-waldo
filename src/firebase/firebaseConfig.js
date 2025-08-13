@@ -11,6 +11,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
+// Find missing vars
 const missingEnvVars = Object.entries(firebaseConfig).filter(
   ([key, value]) => !value
 );
